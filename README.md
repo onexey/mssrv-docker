@@ -6,3 +6,5 @@ Current Stack:
 
 - Portainer
 - Pi-hole
+- qBittorrent
+- Plex
