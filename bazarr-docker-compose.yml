@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./data/bazarr/config:/config
+      - ./data/qbittorrent/downloads/movies:/movies #optional
+      - ./data/qbittorrent/downloads/series:/tv #optional
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
