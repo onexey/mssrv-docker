@@ -1,0 +1,138 @@
+---
+version: "3"
+services:
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/portainer:/data
+    ports:
+      - 9000:9000
+
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Istanbul
+    volumes:
+      - ./data/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Istanbul
+      - WEBUI_PORT=8080
+    volumes:
+      - ./data/qbittorrent/config:/config
+      - ./data/qbittorrent/downloads:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex
+    container_name: plex
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+      - ALLOWED_NETWORKS=192.168.0.0/16,172.0.0.0/8
+    volumes:
+      - ./data/plex/library:/config
+      - ./data/qbittorrent/downloads/series:/tv
+      - ./data/qbittorrent/downloads/movies:/movies
+    restart: unless-stopped
+    ports:
+      - 32400:32400
+      - 1901:1900/udp
+      - 3005:3005
+      - 5354:5353/udp
+      - 8324:8324
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+      - 32469:32469
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./data/bazarr/config:/config
+      - ./data/qbittorrent/downloads/movies:/movies #optional
+      - ./data/qbittorrent/downloads/series:/tv #optional
+      - ./data/qbittorrent/downloads/movies:/downloads/movies
+      - ./data/qbittorrent/downloads/series:/downloads/series
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS=<run options here> #optional
+    volumes:
+      - ./data/jackett/config:/config
+      - ./data/qbittorrent/downloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./data/radarr/config:/config
+      - ./data/qbittorrent/downloads/movies:/movies #optional
+      - ./data/qbittorrent/downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./data/sonarr/config:/config
+      - ./data/qbittorrent/downloads/series:/tv #optional
+      - ./data/qbittorrent/downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+
