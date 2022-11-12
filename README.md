@@ -5,6 +5,11 @@ Docker-compose files for home server. All containers configured to use ./data/{c
 Current Stack:
 
 - Portainer
-- Pi-hole
+- Heimdall
 - qBittorrent
 - Plex
+- Bazarr
+- Jackett
+- Radarr
+- Sonarr
+
