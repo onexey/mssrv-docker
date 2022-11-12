@@ -11,7 +11,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./data/portainer:/data
+      - ${DataRootPath:-.}/data/portainer:/data
     ports:
       - 9000:9000
       - 8000:8000
@@ -25,7 +25,7 @@ services:
       - PGID=1000
       - TZ=Europe/Istanbul
     volumes:
-      - ./data/heimdall:/config
+      - ${DataRootPath:-.}/data/heimdall:/config
     ports:
       - 80:80
       - 443:443
@@ -40,8 +40,8 @@ services:
       - TZ=Europe/Istanbul
       - WEBUI_PORT=8080
     volumes:
-      - ./data/qbittorrent/config:/config
-      - ./data/qbittorrent/downloads:/downloads
+      - ${DataRootPath:-.}/data/qbittorrent/config:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -58,9 +58,9 @@ services:
       - PLEX_CLAIM= #optional
       - ALLOWED_NETWORKS=192.168.0.0/16,172.0.0.0/8
     volumes:
-      - ./data/plex/library:/config
-      - ./data/qbittorrent/downloads/series:/tv
-      - ./data/qbittorrent/downloads/movies:/movies
+      - ${DataRootPath:-.}/data/plex/library:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies
     restart: unless-stopped
     ports:
       - 32400:32400
@@ -82,11 +82,11 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./data/bazarr/config:/config
-      - ./data/qbittorrent/downloads/movies:/movies #optional
-      - ./data/qbittorrent/downloads/series:/tv #optional
-      - ./data/qbittorrent/downloads/movies:/downloads/movies
-      - ./data/qbittorrent/downloads/series:/downloads/series
+      - ${DataRootPath:-.}/data/bazarr/config:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies #optional
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv #optional
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/downloads/movies
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/downloads/series
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -101,8 +101,8 @@ services:
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
     volumes:
-      - ./data/jackett/config:/config
-      - ./data/qbittorrent/downloads:/downloads
+      - ${DataRootPath:-.}/data/jackett/config:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -115,9 +115,9 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./data/radarr/config:/config
-      - ./data/qbittorrent/downloads/movies:/movies #optional
-      - ./data/qbittorrent/downloads:/downloads #optional
+      - ${DataRootPath:-.}/data/radarr/config:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies #optional
+      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -130,9 +130,9 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./data/sonarr/config:/config
-      - ./data/qbittorrent/downloads/series:/tv #optional
-      - ./data/qbittorrent/downloads:/downloads #optional
+      - ${DataRootPath:-.}/data/sonarr/config:/config
+      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv #optional
+      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
