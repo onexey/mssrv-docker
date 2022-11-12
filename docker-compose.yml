@@ -3,17 +3,19 @@ version: "3"
 services:
 
   portainer:
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ee:latest
     container_name: portainer
     restart: always
     security_opt:
       - no-new-privileges:true
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./data/portainer:/data
     ports:
       - 9000:9000
+      - 8000:8000
+      - 9443:9443
 
   heimdall:
     image: lscr.io/linuxserver/heimdall:latest
