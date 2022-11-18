@@ -23,5 +23,3 @@ services:
       - 7900:7900
     container_name: selenium
     restart: unless-stopped
-    volumes:
-      - ${DataRootPath:-.}/data/selenium/dev/shm:/dev/shm
