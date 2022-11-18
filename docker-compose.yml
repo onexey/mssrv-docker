@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
 
   plex:
-    image: lscr.io/linuxserver/plex
+    image: lscr.io/linuxserver/plex:latest
     container_name: plex
     environment:
       - PUID=1000
