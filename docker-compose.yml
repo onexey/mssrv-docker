@@ -1,30 +1,6 @@
 ---
 version: "3"
 services:
-
-  heimdall:
-    image: lscr.io/linuxserver/heimdall:latest
-    container_name: heimdall
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Istanbul
-    volumes:
-      - ${DataRootPath:-.}/data/heimdall:/config
-    ports:
-      - 81:80
-      - 444:443
-    restart: unless-stopped
-    
-  flame:
-    image: pawelmalak/flame
-    container_name: flame
-    volumes:
-      - ${DataRootPath:-.}/data/flame:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration
-    ports:
-      - 5005:5005
-    restart: unless-stopped
     
   dashy:
     # To build from source, replace 'image: lissy93/dashy' with 'build: .'
