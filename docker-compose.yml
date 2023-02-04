@@ -38,7 +38,7 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - ${DataRootPath:-.}/data/qbittorrent/config:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads
+      - ${MediaRootPath:-.}/downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -56,8 +56,8 @@ services:
       - ALLOWED_NETWORKS=192.168.0.0/16,172.0.0.0/8
     volumes:
       - ${DataRootPath:-.}/data/plex/library:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies
+      - ${MediaRootPath:-.}/downloads/series:/tv
+      - ${MediaRootPath:-.}/downloads/movies:/movies
     restart: unless-stopped
     ports:
       - 32400:32400
@@ -80,10 +80,10 @@ services:
       - TZ=Europe/London
     volumes:
       - ${DataRootPath:-.}/data/bazarr/config:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies #optional
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv #optional
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/downloads/movies
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/downloads/series
+      - ${MediaRootPath:-.}/downloads/movies:/movies #optional
+      - ${MediaRootPath:-.}/downloads/series:/tv #optional
+      - ${MediaRootPath:-.}/downloads/movies:/downloads/movies
+      - ${MediaRootPath:-.}/downloads/series:/downloads/series
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -99,7 +99,7 @@ services:
       - RUN_OPTS=<run options here> #optional
     volumes:
       - ${DataRootPath:-.}/data/jackett/config:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads
+      - ${MediaRootPath:-.}/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -113,8 +113,8 @@ services:
       - TZ=Europe/London
     volumes:
       - ${DataRootPath:-.}/data/radarr/config:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/movies:/movies #optional
-      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads #optional
+      - ${MediaRootPath:-.}/downloads/movies:/movies #optional
+      - ${MediaRootPath:-.}/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -128,8 +128,8 @@ services:
       - TZ=Europe/London
     volumes:
       - ${DataRootPath:-.}/data/sonarr/config:/config
-      - ${DataRootPath:-.}/data/qbittorrent/downloads/series:/tv #optional
-      - ${DataRootPath:-.}/data/qbittorrent/downloads:/downloads #optional
+      - ${MediaRootPath:-.}/downloads/series:/tv #optional
+      - ${MediaRootPath:-.}/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
