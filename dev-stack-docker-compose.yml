@@ -8,9 +8,7 @@ services:
     restart: unless-stopped
     container_name: MySQL57
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_USER: techteam
-      MYSQL_ROOT_PASSWORD: 'somepassword1!'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ROOT_HOST: '%'
     ports:
       - '3306:3306'
