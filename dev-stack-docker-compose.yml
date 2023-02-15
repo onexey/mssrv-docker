@@ -15,5 +15,4 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - my-db:/var/lib/mysql
       - ${DataRootPath:-.}/data/mysql:/var/lib/mysql
