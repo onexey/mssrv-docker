@@ -8,7 +8,6 @@ services:
     restart: unless-stopped
     container_name: MySQL57
     environment:
-      MYSQL_DATABASE: 'db'
       MYSQL_USER: 'root'
       MYSQL_PASSWORD: 'somepassword1!'
       MYSQL_ROOT_PASSWORD: 'somepassword1!'
