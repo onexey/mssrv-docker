@@ -3,6 +3,7 @@
 
 version: '3.3'
 services:
+
   MySQL57:
     image: mysql:5.7
     restart: unless-stopped
@@ -19,11 +20,19 @@ services:
     image: redis/redis-stack-server:latest
     restart: unless-stopped
     container_name: Redis
-    environment:
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'somepassword1!'
-      MYSQL_ROOT_PASSWORD: 'somepassword1!'
     ports:
       - '6379:6379'
     stdin_open: true 
     tty: true
+
+  MSSQL2022:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    container_name: MSSQL2022
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'SomeRandom1!'
+    ports:
+      - '1433:1433'
+    volumes:
+      - ${DataRootPath:-.}/data/mssql:/var/opt/mssql
