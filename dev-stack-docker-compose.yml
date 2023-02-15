@@ -1,26 +1,19 @@
 ---
 # Development Stack
 
-version: "3"
+version: '3.3'
 services:
-  jenkins:
-    image: jenkins/jenkins:latest
-    privileged: true
-    user: root
-    ports:
-      - 8090:8080
-      - 50000:50000
+  MySQL57:
+    image: mysql:5.7
     restart: unless-stopped
-    container_name: jenkins
+    container_name: MySQL57
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'somepassword1!'
+      MYSQL_ROOT_PASSWORD: 'somepassword1!'
+    ports:
+      - '3306:3306'
     volumes:
-      - ${DataRootPath:-.}/data/jenkins/jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-
-  selenium:
-    image: selenium/standalone-chrome:latest
-    shm_size: 2gb
-    ports:
-      - 4444:4444
-      - 7900:7900
-    container_name: selenium
-    restart: unless-stopped
+      - my-db:/var/lib/mysql
+      - ${DataRootPath:-.}/data/mysql:/var/lib/mysql
