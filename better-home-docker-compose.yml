@@ -22,3 +22,16 @@ services:
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     restart: unless-stopped
+
+  grocy:
+    image: lscr.io/linuxserver/grocy:latest
+    container_name: grocy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ='Central European Time'
+    volumes:
+      - ${DataRootPath:-.}/data/grocy:/config
+    ports:
+      - 9283:88
+    restart: unless-stopped
