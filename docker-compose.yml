@@ -45,39 +45,13 @@ services:
       - 6881:6881/udp
     restart: unless-stopped
 
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
-      - PLEX_CLAIM= #optional
-      - ALLOWED_NETWORKS=192.168.0.0/16,172.0.0.0/8
-    volumes:
-      - ${DataRootPath:-.}/data/plex/library:/config
-      - ${MediaRootPath:-.}/downloads/series:/tv
-      - ${MediaRootPath:-.}/downloads/movies:/movies
-    restart: unless-stopped
-    ports:
-      - 32400:32400
-      - 1901:1900/udp
-      - 3005:3005
-      - 5354:5353/udp
-      - 8324:8324
-      - 32410:32410/udp
-      - 32412:32412/udp
-      - 32413:32413/udp
-      - 32414:32414/udp
-      - 32469:32469
-
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=CET
     volumes:
       - ${DataRootPath:-.}/data/bazarr/config:/config
       - ${MediaRootPath:-.}/downloads/movies:/movies #optional
@@ -94,7 +68,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=CET
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
     volumes:
@@ -110,7 +84,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=CET
     volumes:
       - ${DataRootPath:-.}/data/radarr/config:/config
       - ${MediaRootPath:-.}/downloads/movies:/movies #optional
@@ -125,7 +99,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=CET
     volumes:
       - ${DataRootPath:-.}/data/sonarr/config:/config
       - ${MediaRootPath:-.}/downloads/series:/tv #optional
@@ -134,4 +108,21 @@ services:
       - 8989:8989
     restart: unless-stopped
 
-
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=CET
+      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
+    volumes:
+      - ${DataRootPath:-.}/data/jellyfin:/config
+      - ${MediaRootPath:-.}/downloads/series:/data/tvshows
+      - ${MediaRootPath:-.}/downloads/movies:/data/movies
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
+    restart: unless-stopped
