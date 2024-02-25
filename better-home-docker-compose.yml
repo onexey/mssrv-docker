@@ -33,5 +33,5 @@ services:
     volumes:
       - ${DataRootPath:-.}/data/grocy:/config
     ports:
-      - 9283:88
+      - 9283:80
     restart: unless-stopped
