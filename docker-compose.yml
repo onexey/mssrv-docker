@@ -34,7 +34,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Istanbul
+      - TZ=CET
       - WEBUI_PORT=8080
     volumes:
       - ${DataRootPath:-.}/data/qbittorrent/config:/config
@@ -115,7 +115,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=CET
-      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
+      - JELLYFIN_PublishedServerUrl=${InternalIP:-} #optional
     volumes:
       - ${DataRootPath:-.}/data/jellyfin:/config
       - ${MediaRootPath:-.}/downloads/series:/data/tvshows
