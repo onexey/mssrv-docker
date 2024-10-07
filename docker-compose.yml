@@ -1,5 +1,4 @@
----
-version: "3"
+# Entertainment services
 services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -10,8 +9,8 @@ services:
       - TZ=CET
       - WEBUI_PORT=8080
     volumes:
-      - ${DataRootPath:-.}/data/qbittorrent/config:/config
-      - ${MediaRootPath:-.}/downloads:/downloads
+      - ${DataRootPath:-.}/config/qbittorrent/config:/config
+      - ${MediaRootPath:-.}/data/downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -26,11 +25,11 @@ services:
       - PGID=1000
       - TZ=CET
     volumes:
-      - ${DataRootPath:-.}/data/bazarr/config:/config
-      - ${MediaRootPath:-.}/downloads/movies:/movies #optional
-      - ${MediaRootPath:-.}/downloads/series:/tv #optional
-      - ${MediaRootPath:-.}/downloads/movies:/downloads/movies
-      - ${MediaRootPath:-.}/downloads/series:/downloads/series
+      - ${DataRootPath:-.}/config/bazarr/config:/config
+      - ${MediaRootPath:-.}/data/movies:/movies #optional
+      - ${MediaRootPath:-.}/data/series:/tv #optional
+      - ${MediaRootPath:-.}/data/movies:/downloads/movies
+      - ${MediaRootPath:-.}/data/series:/downloads/series
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -45,8 +44,8 @@ services:
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
     volumes:
-      - ${DataRootPath:-.}/data/jackett/config:/config
-      - ${MediaRootPath:-.}/downloads:/downloads
+      - ${DataRootPath:-.}/config/jackett/config:/config
+      - ${MediaRootPath:-.}/data/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -59,9 +58,9 @@ services:
       - PGID=1000
       - TZ=CET
     volumes:
-      - ${DataRootPath:-.}/data/radarr/config:/config
-      - ${MediaRootPath:-.}/downloads/movies:/movies #optional
-      - ${MediaRootPath:-.}/downloads:/downloads #optional
+      - ${DataRootPath:-.}/config/radarr/config:/config
+      - ${MediaRootPath:-.}/data/movies:/movies #optional
+      - ${MediaRootPath:-.}/data/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -74,9 +73,9 @@ services:
       - PGID=1000
       - TZ=CET
     volumes:
-      - ${DataRootPath:-.}/data/sonarr/config:/config
-      - ${MediaRootPath:-.}/downloads/series:/tv #optional
-      - ${MediaRootPath:-.}/downloads:/downloads #optional
+      - ${DataRootPath:-.}/config/sonarr/config:/config
+      - ${MediaRootPath:-.}/data/series:/tv #optional
+      - ${MediaRootPath:-.}/data/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -90,9 +89,9 @@ services:
       - TZ=CET
       - JELLYFIN_PublishedServerUrl=${InternalIP:-} #optional
     volumes:
-      - ${DataRootPath:-.}/data/jellyfin:/config
-      - ${MediaRootPath:-.}/downloads/series:/data/tvshows
-      - ${MediaRootPath:-.}/downloads/movies:/data/movies
+      - ${DataRootPath:-.}/config/jellyfin:/config
+      - ${MediaRootPath:-.}/data/series:/data/tvshows
+      - ${MediaRootPath:-.}/data/movies:/data/movies
     ports:
       - 8096:8096
       - 8920:8920 #optional
@@ -109,6 +108,6 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ${DataRootPath:-.}/data/homepage:/app/config # Make sure your local config directory exists
+      - ${DataRootPath:-.}/config/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped

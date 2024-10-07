@@ -1,5 +1,3 @@
-version: "3"
-
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   pihole:
@@ -16,7 +14,7 @@ services:
       WEBPASSWORD: '${WebPassword:-}'
     # Volumes store your data between container upgrades
     volumes:
-      - '${DataRootPath:-.}/data/pihole/etc-pihole:/etc/pihole'
-      - '${DataRootPath:-.}/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '${DataRootPath:-.}/config/pihole/etc-pihole:/etc/pihole'
+      - '${DataRootPath:-.}/config/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     restart: unless-stopped
