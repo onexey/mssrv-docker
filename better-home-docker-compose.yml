@@ -8,13 +8,30 @@ services:
       - "${InternalIP:-}:53:53/tcp"
       - "${InternalIP:-}:53:53/udp"
       # - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "80:80/tcp"
+      - "8081:80/tcp"
     environment:
       TZ: 'Central European Time'
       WEBPASSWORD: '${WebPassword:-}'
     # Volumes store your data between container upgrades
     volumes:
-      - '${DataRootPath:-.}/config/pihole/etc-pihole:/etc/pihole'
-      - '${DataRootPath:-.}/config/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '${DataRootPath:-..}/config/pihole/etc-pihole:/etc/pihole'
+      - '${DataRootPath:-..}/config/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     restart: unless-stopped
+
+# https://hub.docker.com/_/caddy
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ${DataRootPath:-..}/config/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ${DataRootPath:-..}/config/caddy/site:/srv
+      - ${DataRootPath:-..}/config/caddy/data:/data
+      - ${DataRootPath:-..}/config/caddy/config:/config
