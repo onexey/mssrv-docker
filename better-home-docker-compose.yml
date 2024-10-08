@@ -21,7 +21,9 @@ services:
 
 # https://hub.docker.com/_/caddy
   caddy:
-    image: caddy:latest
+    build:
+      context: .
+      dockerfile: CaddyCloudflareDockerfile
     container_name: caddy
     restart: unless-stopped
     cap_add:
