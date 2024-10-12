@@ -104,7 +104,7 @@ services:
     container_name: homepage
     environment:
       - PUID=1000
-      - PGID=1000
+      - PGID=999 # docker group id
     ports:
       - 3000:3000
     volumes:
