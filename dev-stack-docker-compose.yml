@@ -24,6 +24,7 @@ services:
   PostgreSQL:
     image: postgres:latest
     restart: unless-stopped
+    container_name: PostgreSQL
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
