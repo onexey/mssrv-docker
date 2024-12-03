@@ -20,3 +20,11 @@ services:
       - '1433:1433'
     volumes:
       - ${DataRootPath:-.}/data/mssql:/var/opt/mssql/data
+
+  PostgreSQL:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${DataRootPath:-.}/data/postgresql:/var/lib/postgresql/data 
