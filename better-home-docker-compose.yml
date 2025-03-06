@@ -40,6 +40,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    environment:
+      - CF_API_TOKEN # workaround for env. variable won't pass to the container. https://github.com/portainer/portainer/issues/10491#issuecomment-2192819975
     ports:
       - "80:80"
       - "443:443"
