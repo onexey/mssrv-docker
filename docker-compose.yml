@@ -4,8 +4,8 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
       - WEBUI_PORT=8080
     volumes:
@@ -21,8 +21,8 @@ services:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
     volumes:
       - ${DataRootPath:-.}/bazarr/config:/config
@@ -38,8 +38,8 @@ services:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
@@ -54,8 +54,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
     volumes:
       - ${DataRootPath:-.}/radarr/config:/config
@@ -69,8 +69,8 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
     volumes:
       - ${DataRootPath:-.}/sonarr/config:/config
@@ -84,8 +84,8 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=950
+      - PGID=950
       - TZ=CET
       - JELLYFIN_PublishedServerUrl=${InternalIP:-} #optional
     volumes:
