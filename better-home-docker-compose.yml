@@ -5,6 +5,7 @@ services:
     environment:
       - PUID=1000
       - PGID=999 # docker group id
+      - HOMEPAGE_ALLOWED_HOSTS=home.soylu.uk
     ports:
       - 3000:3000
     volumes:
