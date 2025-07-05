@@ -19,7 +19,19 @@ services:
     ports:
       - '1433:1433'
     volumes:
-      - ${DataRootPath:-.}/data/mssql:/var/opt/mssql/data
+      - ${DataRootPath:-.}/data/mssql/2022:/var/opt/mssql/data
+
+  MSSQL2025:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    restart: unless-stopped
+    container_name: MSSQL2025
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: ${MSSQL_PASSWORD}
+    ports:
+      - '1433:1433'
+    volumes:
+      - ${DataRootPath:-.}/data/mssql/2025:/var/opt/mssql/data
 
   PostgreSQL:
     image: postgres:latest
