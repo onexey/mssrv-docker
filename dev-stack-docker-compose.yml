@@ -29,7 +29,7 @@ services:
       ACCEPT_EULA: 'Y'
       MSSQL_SA_PASSWORD: ${MSSQL_PASSWORD}
     ports:
-      - '1433:1433'
+      - '1434:1433'
     volumes:
       - ${DataRootPath:-.}/data/mssql/2025:/var/opt/mssql/data
 
