@@ -11,6 +11,7 @@ services:
 
   MSSQL2022:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     restart: unless-stopped
     container_name: MSSQL2022
     environment:
@@ -23,6 +24,7 @@ services:
 
   MSSQL2025:
     image: mcr.microsoft.com/mssql/server:2025-latest
+    user: root
     restart: unless-stopped
     container_name: MSSQL2025
     environment:
