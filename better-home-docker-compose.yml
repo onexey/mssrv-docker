@@ -52,3 +52,15 @@ services:
       - ${DataRootPath:-..}/config/caddy/site:/srv
       - ${DataRootPath:-..}/config/caddy/data:/data
       - ${DataRootPath:-..}/config/caddy/config:/config
+
+# https://github.com/sysadminsmedia/homebox
+  homebox:
+    image: ghcr.io/sysadminsmedia/homebox:latest
+    container_name: homebox
+    environment:
+      TZ: 'Central European Time'
+    ports:
+      - 3100:7745
+    volumes:
+      - ${DataRootPath:-..}/config/homebox/data:/data
+    restart: unless-stopped
