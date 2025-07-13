@@ -111,4 +111,4 @@ services:
       - ${MediaRootPath:-.}/filebrowser/database:/database
       - ${MediaRootPath:-.}/filebrowser/config:/config
     ports:
-      - 8080:80
+      - 8081:80
