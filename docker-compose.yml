@@ -98,16 +98,3 @@ services:
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
     restart: unless-stopped
-  filebrowser:
-    image: filebrowser/filebrowser
-    container_name: filebrowser
-    restart: unless-stopped
-    user: truenas_admin
-    environment:
-      - TZ=CET
-    volumes:
-      - ${DataRootPath:-.}/filebrowser/data:/srv
-      - ${DataRootPath:-.}/filebrowser/database:/database
-      - ${DataRootPath:-.}/filebrowser/config:/config
-    ports:
-      - 8081:80
