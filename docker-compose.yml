@@ -108,7 +108,7 @@ services:
       - TZ=CET
     volumes:
       - ${DataRootPath:-.}/filebrowser/data:/srv
-      - ${MediaRootPath:-.}/filebrowser/database:/database
-      - ${MediaRootPath:-.}/filebrowser/config:/config
+      - ${DataRootPath:-.}/filebrowser/database:/database
+      - ${DataRootPath:-.}/filebrowser/config:/config
     ports:
       - 8081:80
