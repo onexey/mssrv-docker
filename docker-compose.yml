@@ -102,9 +102,8 @@ services:
     image: filebrowser/filebrowser
     container_name: filebrowser
     restart: unless-stopped
+    user: truenas_admin
     environment:
-      - UID=950
-      - GID=950
       - TZ=CET
     volumes:
       - ${DataRootPath:-.}/filebrowser/data:/srv
