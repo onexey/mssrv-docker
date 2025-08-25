@@ -35,6 +35,19 @@ services:
     volumes:
       - ${DataRootPath:-.}/data/mssql/2025:/var/opt/mssql/data
 
+  MSSQL2025Preview:
+    image: mcr.microsoft.com/mssql/server:2025-RC0-ubuntu-24.04	
+    user: root
+    restart: unless-stopped
+    container_name: MSSQL2025Preview
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: ${MSSQL_PASSWORD}
+    ports:
+      - '1435:1433'
+    volumes:
+      - ${DataRootPath:-.}/data/mssql/2025Preview:/var/opt/mssql/data
+
   PostgreSQL:
     image: postgres:latest
     restart: unless-stopped
