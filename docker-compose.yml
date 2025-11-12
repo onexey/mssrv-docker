@@ -106,6 +106,6 @@ services:
     ports:
       - 127.0.0.1:1104:1104
     volumes:
-      - ${DataRootPath:-.}/hoshinova/config.toml:/app/config.toml
+      - ${DataRootPath:-.}/hoshinova/:/app/
       - ${MediaRootPath:-.}/hoshinova/temp/:/app/temp
       - ${MediaRootPath:-.}/hoshinova/videos:/app/videos
